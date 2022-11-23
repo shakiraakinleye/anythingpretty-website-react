@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html, body, header, nav, section, div, p, footer, button, span, h1, h2, h3, h4, h5, h6, ul, li, svg, a, img 	{
 	margin: 0;
 	padding: 0;	
 	box-sizing: border-box;
-	line-height: 1.15;
+	line-height: 1.5;
 	-webkit-text-size-adjust: 100%;
 	text-size-adjust: 100%;
 }
@@ -30,15 +31,13 @@ a:focus, button:focus	{
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	max-width: 100vw;
+	background-color: #fff;
+	margin: 0;
+	font-size: 14px;
+	/* font-family: 'Nunito', sans-serif; */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
