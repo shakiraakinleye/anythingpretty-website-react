@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
+import { ProductsContextProvider } from "./ProductContext";
 import { NoticeBanner, HelpBanner } from './components/Banners';
 import { Navbar } from './components/Navbar';
 import { Homepage } from './pages/Homepage';
@@ -12,6 +13,7 @@ export function App() {
 
   return (
     <div className="App relative max-w-full tracking-wider">
+      <ProductsContextProvider>
         <NoticeBanner />
         <HelpBanner />
         <Navbar />
@@ -20,6 +22,7 @@ export function App() {
           {/* <Route path="/cart-page" element={<Cartpage />} /> */}
         </Routes>
         <Footer />
+      </ProductsContextProvider>
     </div>
   );
 }
