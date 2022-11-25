@@ -5,6 +5,7 @@ import  {convertPriceToLocalCurrency}  from "../scripts/utility";
 import { Options } from "./Options";
 import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
 import "../styles/Product.css"
+import { InitOptions } from "./Options";
 
 
 export function Product({product}){
@@ -18,7 +19,9 @@ export function Product({product}){
         quantity: inStock ? 1 : 0,
         color: product.variants[0]
     }
-    const [OptionsJSX, options] = Options(product, initialOptions)
+
+    const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialOptions, product) 
+
 
     const classDisabled = inStock ? "" : "opacity-50 pointer-events-none"
     const stockDisplay = inStock ? 
@@ -39,8 +42,7 @@ export function Product({product}){
     return(
         <div className={classDisabled + " flex flex-col items-center text-center px-4 py-2 capitalize"}>
             <div className="mb-2">
-            {/* import image from {product.imageUrl}; */}
-              {/* <img src={product.imageUrl} alt={product.name} className="product__image" /> */}
+              <img src={require("../" + product.imageUrl)} alt={product.name} className="product__image" />
             </div>
 
             <p className="mb-2 text-sm">{product.name}</p>
@@ -50,7 +52,13 @@ export function Product({product}){
                 <p>{convertPriceToLocalCurrency(product.price)}</p>
             </div>
 
-            {OptionsJSX}
+            <Options 
+              item={product}
+              options={options}
+              onDecreaseQuantity={decreaseQuantityHandler}
+              onIncreaseQuantity={increaseQuantityHandler}
+              onColorChange={colorChangeHandler}
+            />
 
             <div className=" w-full" >
               <button className="w-11/12 mx-auto py-2 px-4 bg-black flex justify-center items-center gap-2 text-white font-semibold border border-black rounded-lg hover:bg-white hover:text-black"
@@ -71,7 +79,9 @@ export function Product({product}){
               }}
               >
                 <img src={isHovered ? blackAddToCartIcon : whiteAddToCartIcon} alt="Add To Cart" className="w-5 pointer-events-none" />
-                <span className="pointer-events-none"> {inCart ? "Added To Bag" : "Add To Bag"} </span>
+                <span className="pointer-events-none"> 
+                  {inCart ? "Added To Bag" : "Add To Bag"}
+                </span>
               </button>
             </div>
         </div>
