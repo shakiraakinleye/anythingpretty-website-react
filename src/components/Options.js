@@ -36,23 +36,6 @@ export function InitOptions(initOps, item ){
 }
 
 
-
-function Variants({item, onChange}) {
-
-    const variantList = item.variants.map((option, index) => {
-        return (
-            <option key={index} value={option}>{option}</option>
-        )
-    })
-
-    return (
-        <select name="product__color" className="w-16 h-full py-0.5 border-x border-y border-black rounded-t rounded-b cursor-pointer text-center appearance-none hover:text-white hover:bg-[#232323]"
-        onChange={onChange}>
-            {variantList}
-        </select>
-    )
-}
-
 export function Options({item, options, onColorChange, onIncreaseQuantity, onDecreaseQuantity}){
 
     return(
@@ -80,5 +63,22 @@ export function Options({item, options, onColorChange, onIncreaseQuantity, onDec
                     />
                 </div>
             </div>
+    )
+}
+
+
+function Variants({item, onChange}) {
+
+    const variantList = item.variants.map((option, index) => {
+        return (
+            <option key={index} value={option}>{option}</option>
+        )
+    })
+
+    return (
+        <select name="product__color" className="w-16 h-full py-0.5 border-x border-y border-black rounded-t rounded-b cursor-pointer text-center appearance-none hover:text-white hover:bg-[#232323]"
+        onChange={onChange}>
+            {variantList}
+        </select>
     )
 }
