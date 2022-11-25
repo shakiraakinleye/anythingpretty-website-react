@@ -11,6 +11,7 @@ export function CartItem({cartItem}){
         color: cartItem.color
     }
 
+    // Fix - Can't update Storage from Cart
     const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialCartOptions, cartItem) 
 
     const dispatchToCart = useContext(DispatchCartContext)

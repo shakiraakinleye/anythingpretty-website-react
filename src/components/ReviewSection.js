@@ -34,6 +34,8 @@ export function ReviewSection(){
                 reviewerLocation={"Lagos, NG"}
                 />
 
+                {/* Fix Slider */}
+{/* 
                 <Review 
                 reviewMessage={"The necklace set I got is so pretty and long-lasting. I definitely got my money's worth"}
                 reviewerName={"Nenye"}
@@ -44,7 +46,7 @@ export function ReviewSection(){
                 reviewMessage={"AP is my forever plug! I just love the pieces, they are so pretty and comfy!"}
                 reviewerName={"Faith"}
                 reviewerLocation={"Abuja, NG"}
-                />
+                /> */}
 
                 <button className="slider__btn slider__btn--left absolute top-1/3 left-1 sm:left-8 lg:left-12 p-2 z-10 border-none text-black translate-x-1">
                     <img src={leftArrow} alt="left-arrow" className="w-6" />
