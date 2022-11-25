@@ -1,9 +1,11 @@
+// import { useState } from "react";
 import React, { useContext } from "react";
-import { ProductsContext } from "../ProductContext";
+import { ProductsContext } from "../scripts/ProductContext";
 import { Product } from "./Product";
 import "../styles/Product.css"
 
 export function ProductSection(){
+
     function ProductList(){
         const productsList = useContext(ProductsContext)
 
@@ -16,7 +18,7 @@ export function ProductSection(){
         }) 
         
         return(
-            <ul className="product__list px-4 sm:px-8 lg:px-16">
+            <ul className="product__list grid px-4 sm:px-8 lg:px-16">
                 {listItems}
             </ul>
         )
