@@ -2,34 +2,71 @@ import React, {useContext} from "react";
 import { Options } from "./Options";
 import { convertPriceToLocalCurrency } from "../scripts/utility";
 import { DispatchCartContext } from "../scripts/CartStorage";
-import "../styles/CartItem.css"
+
+import { InitOptions } from "./Options";
 
 export function CartItem({cartItem}){
-    const initialOptions = {
+    const initialCartOptions = {
         quantity: cartItem.quantity,
         color: cartItem.color
     }
 
-    const [OptionsJSX, options] = Options(cartItem, initialOptions)
+    const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialCartOptions, cartItem) 
 
     const dispatchToCart = useContext(DispatchCartContext)
 
-    // use options when checking out
-    console.log(options)
+    function quantityChangeDispatch(){
+        dispatchToCart(
+            {
+                type: "edited quantity",
+                id: cartItem.id,
+                quantity: options.quantity, 
+            }
+        )
+        console.log("quantityChangeDispatched")
+    }
+
+    function cartQuantityIncreaseHandler(){
+        increaseQuantityHandler() &&
+        quantityChangeDispatch()
+    }
+
+    function cartQuantityDecreaseHandler(){
+        decreaseQuantityHandler() &&
+        quantityChangeDispatch();
+    }
+
+    function cartColorChangeHandler(e){
+        console.log("colorChangeDispatched")
+        colorChangeHandler(e);
+        dispatchToCart({
+            type: "edited color",
+            id: cartItem.id,
+            color: options.color
+        });
+        // console.log("colorChangeDispatched")
+    }
+
 
     return(
-        <div className="flex justify-between items-stretch py-4 pr-2 border border-[#c8c8c8] ">
-            <div className="w-1/5 flex items-center border border-red-700">
-                <img src={cartItem.imageUrl} alt={cartItem.name} />
+        <div className="flex justify-between py-2 pr-2 border border-t-0 border-[#c8c8c8]">
+            <div className="w-1/5 flex justify-center items-center">
+                <img src={require("../" + cartItem.imageUrl)} alt={cartItem.name} className=" sm:w-20 lg:h-20 "/>
             </div>
 
-            <div className="border border-red-700 w-4/5 py-2 pl-2 grid grid-cols-3 sm:flex sm:flex-nowrap justify-between items-center gap-3 ">
+            <div className="w-4/5 py-2 pl-2 grid grid-cols-3 sm:flex sm:flex-nowrap justify-between items-center gap-3 ">
                 <p className="font-medium sm:w-1/6 overflow-auto text-center">
                     {cartItem.name}
                 </p>
 
                 <div className="col-span-2 sm:w-2/6">
-                    {OptionsJSX}
+                    <Options 
+                        item={cartItem}
+                        options={options}
+                        onDecreaseQuantity={cartQuantityDecreaseHandler}
+                        onIncreaseQuantity={cartQuantityIncreaseHandler}
+                        onColorChange={cartColorChangeHandler}
+                    />
                 </div>
 
                 <p className="flex flex-col items-center sm:w-1/6">
