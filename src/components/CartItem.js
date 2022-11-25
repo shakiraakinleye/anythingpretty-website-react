@@ -14,6 +14,7 @@ export function CartItem({cartItem}){
     // Fix - Can't update Storage from Cart
     const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialCartOptions, cartItem) 
 
+    console.log(options)
     const dispatchToCart = useContext(DispatchCartContext)
 
     function quantityChangeDispatch(){
@@ -28,24 +29,34 @@ export function CartItem({cartItem}){
     }
 
     function cartQuantityIncreaseHandler(){
-        increaseQuantityHandler() &&
-        quantityChangeDispatch()
+        increaseQuantityHandler()
+        // &&
+        // quantityChangeDispatch()
+        // dispatchToCart({
+        //         type: "edited quantity",
+        //         id: cartItem.id,
+        //         quantity: options.quantity, 
+        //     })
     }
 
     function cartQuantityDecreaseHandler(){
-        decreaseQuantityHandler() &&
-        quantityChangeDispatch();
+        decreaseQuantityHandler() 
+        // &&
+        // quantityChangeDispatch();
     }
 
     function cartColorChangeHandler(e){
-        console.log("colorChangeDispatched")
-        colorChangeHandler(e);
-        dispatchToCart({
-            type: "edited color",
-            id: cartItem.id,
-            color: options.color
-        });
         // console.log("colorChangeDispatched")
+        colorChangeHandler(e);
+        // console.log("colorChangeDispatched 2")
+        // dispatchToCart({
+        //     type: "edited color",
+        //     id: cartItem.id,
+        //     // color: "Gold"
+        //     color: options.color
+        // });
+        // console.log("colorChangeDispatched 3")
+
     }
 
 

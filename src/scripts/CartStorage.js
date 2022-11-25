@@ -54,6 +54,7 @@ export function CartStorageReducer(cart, action){
                 }
             })
             updateCartStorage(updatedCart)
+            console.log(updatedCart)
             return updatedCart; 
         }
         case "edited quantity" : {
@@ -69,6 +70,7 @@ export function CartStorageReducer(cart, action){
                 }
             })
             updateCartStorage(updatedCart)
+            console.log(updatedCart)
             return updatedCart; 
         }
         case "deleted" : {
