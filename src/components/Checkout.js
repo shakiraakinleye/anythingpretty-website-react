@@ -18,10 +18,12 @@ export function Checkout({cartSubtotal, shipping}) {
 
     function placeOrder(){
         const href = `https://wa.me/2348143671737?text=${urlMessage}`;
-        window.open(href, "_blank") &&
+        window.open(href, "_blank");
         dispatchToCart({
             type: "clear"
-        }) 
+        });
+        window.location.replace('/');
+
     }
 
     return (
