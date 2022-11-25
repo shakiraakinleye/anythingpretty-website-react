@@ -9,7 +9,7 @@ export function Footer(){
     <footer className="pb-10 bg-white text-black ">    
       <div className="px-4 sm:px-8 lg:px-16 pt-5">
 
-        <div className="pb-2 mb-2 border-b-2 border-solid border-b-[#c8c8c8]">
+        <div className="pb-2 mb-2 border-b border-b-[#c8c8c8]">
           <Link to={"/"}>
             <img src={brandLogo} alt="Brand Logo" className="w-16 sm:w-20" />
           </Link>

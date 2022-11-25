@@ -1,0 +1,29 @@
+.section__brand {
+  background: scroll url(../images/brand-image-mobile.jpg) center/cover no-repeat;
+}
+
+.review__body::before, .review__body::after {
+  content: '"';
+}
+
+
+/* .slide { */
+  /* do not remove */
+  /* transition: transform 1s; */
+/* } */
+
+
+@media only screen and (min-width: 640px) {
+  .section__brand {
+    background-image: url(../images/brand-image-tablet.jpg);
+  }
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .section__brand {
+    background-image: url(../images/brand-image-desktop.jpg);
+  }
+}
+
+
