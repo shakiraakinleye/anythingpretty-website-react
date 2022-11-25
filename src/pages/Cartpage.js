@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../scripts/CartStorage";
 import { CartItem } from "../components/CartItem";
 import sadFace from "../images/sad.png";
-import checkoutImg from "../images/checkout.png";
 import { DispatchCartContext } from "../scripts/CartStorage";
+import { convertPriceToLocalCurrency } from "../scripts/utility";
+import { Checkout } from "../components/Checkout";
 
 
 export function Cartpage(){
@@ -49,21 +50,21 @@ export function Cartpage(){
 
     const dispatchToCart = useContext(DispatchCartContext)
 
-    // const cartSubtotal = cart.reduce((item, i) => {
-
-    // }, 0)
-
-    // const [shipping, setShipping] = useState(0)
-// 
-    // const cartTotal = cartSubtotal + shipping;
+    const subtotals = cart.map(item => {
+        return (item.quantity * item.price)
+    })
+    const cartSubtotal = subtotals.reduce((acc, sub) => {
+        return acc + sub;
+    }, 0)
+    const [shipping, setShipping] = useState(0)
+    const cartTotal = cartSubtotal + +shipping;
 
     return(
         <div className="relative bg-white py-10 px-4 sm:px-8 lg:px-16 text-black">
             <div className="flex flex-col lg:flex-row lg:justify-between">
-                {/* gap-4 sm:justify-between */}
-                <div className="border border-[#c8c8c8] rounded-lg lg:w-2/3 lg:mr-2 pt-2 pb-6 px-2">
+                <div className="border border-[#c8c8c8] rounded-lg lg:w-3/4 lg:mr-2 pt-2 pb-6 px-2">
                     <div className="lg:h-16 py-4 flex justify-between items-center border-b-2 border-[#c8c8c8] ">
-                        <p className="font-medium sm:text-xl ">
+                        <p className="font-medium text-xl sm:text-3xl">
                             My Bag
                         </p>
                         <button className="py-2 px-4 text-white bg-black border border-black rounded-lg hover:bg-[#eb0000] hover:border-[#eb0000]"
@@ -79,7 +80,7 @@ export function Cartpage(){
                     {cartPageContent}                    
                 </div>
             
-                <div className="h-min border border-[#c8c8c8] rounded-lg lg:w-1/3 lg:ml-2 pt-2 pb-6 px-2">
+                <div className="h-min border border-[#c8c8c8] rounded-lg lg:w-1/4 lg:ml-2 pt-2 pb-6 px-2">
                     <div className="w-full">
                         <h1 className="lg:h-16 py-4 flex items-center font-medium sm:text-xl border-b-2 border-[#c8c8c8]  ">
                             Order Summary
@@ -91,7 +92,7 @@ export function Cartpage(){
                                     Subtotal
                                 </span> 
                                 <span>
-                                    {/* {cartSubtotal} */}
+                                    {convertPriceToLocalCurrency(cartSubtotal)}
                                 </span>
                             </div>
             
@@ -105,7 +106,11 @@ export function Cartpage(){
                             </div>
             
                             <div>
-                                <select name="shipping"  className="w-full py-2 px-4 border border-black sm:py-3 ">
+                                <select name="shipping"  className="w-full py-2 px-4 border border-black sm:py-3 "
+                                    onChange={(e) => {
+                                        setShipping(e.target.value)
+                                    }}
+                                >
                                     <option value="0">Select A Shipping Destination</option>
                                     <option value="1500">Lagos Mainland - ₦1,500.00</option>
                                     <option value="2000">Lagos Island - ₦2,000.00</option>
@@ -120,16 +125,13 @@ export function Cartpage(){
                                 TOTAL
                             </span> 
                             <span className="font-semibold">
-                                {/* {cartTotal} */}
+                                {convertPriceToLocalCurrency(cartTotal)}
                             </span>
                         </div>
-                                
-                        <button className="w-full py-3 px-8 flex justify-center items-center gap-3 text-white bg-black border border-black rounded-lg hover:bg-[#232323] hover:border-[#232323]  ">
-                            <img src={checkoutImg} alt="Checkout Button" className="w-6" />
-                            <span className="text-white font-medium ">
-                                Checkout
-                            </span>
-                        </button>
+                        <Checkout
+                            cartSubtotal={cartSubtotal}
+                            shipping={shipping}
+                        />
         
                     </div>
                 </div>
