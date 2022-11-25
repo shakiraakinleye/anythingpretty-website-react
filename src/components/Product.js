@@ -1,81 +1,79 @@
-import addToCartIcon from "../images/add-to-cart.png";
+import { useState, useContext } from "react";
+import whiteAddToCartIcon from "../images/white-add-to-cart.png";
+import blackAddToCartIcon from "../images/black-add-to-cart.png";
 import  {convertPriceToLocalCurrency}  from "../scripts/utility";
+import { Options } from "./Options";
+import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
 import "../styles/Product.css"
 
-export function Product({product}){
-    // import image from {product.imageUrl};
 
+export function Product({product}){
+    const [isHovered, setIsHovered] = useState(false);
+    const cart = useContext(CartContext);
+    const dispatchToCart = useContext(DispatchCartContext);
     const inStock = product.stock > 0;
+    const inCart = cart.some(item => item.id === product.id);
+
+    const initialOptions = {
+        quantity: inStock ? 1 : 0,
+        color: product.variants[0]
+    }
+    const [OptionsJSX, options] = Options(product, initialOptions)
+
+    const classDisabled = inStock ? "" : "opacity-50 pointer-events-none"
     const stockDisplay = inStock ? 
     (
         <>
-            <p className="product__stock__icon product--instock"></p> 
-            <p className="product__stock__note mr-4"> In Stock </p>
+            <p className="bg-[#008000] w-1 h-1 p-1 mr-1 border-0 rounded-full"></p> 
+            <p className="mr-4"> In Stock </p>
         </>
         )
         :
         (
         <>
-            <p className="product__stock__icon product--soldout"></p>
-            <p className="product__stock__note mr-4"> Sold Out </p>
+            <p className="bg-[#ff0000] w-1 h-1 p-1 mr-1 border-0 rounded-full"></p>
+            <p className="mr-4"> Sold Out </p>
         </>
     )
 
-    const formattedPrice = convertPriceToLocalCurrency(product.price)
-        
-
     return(
-        <div className={inStock ? "product" : "product opacity-50 pointer-events-none"}>
-            <div className="product__image__container mb-2">
+        <div className={classDisabled + " flex flex-col items-center text-center px-4 py-2 capitalize"}>
+            <div className="mb-2">
+            {/* import image from {product.imageUrl}; */}
               {/* <img src={product.imageUrl} alt={product.name} className="product__image" /> */}
             </div>
 
-            <p className="product__name">{product.name}</p>
+            <p className="mb-2 text-sm">{product.name}</p>
 
-            <div className="product__info">
+            <div className="flex items-center mb-2">
                 {stockDisplay}                                    
-                <p className="product__price"> {formattedPrice} </p>
+                <p>{convertPriceToLocalCurrency(product.price)}</p>
             </div>
 
-            <div className="product__options">
-                <div className="product__quantity__container">
-                    <form id="product__quantity__form" className="product__quantity__form" action="#">
-                        <input type="button" value="-" className={"product__quantity--decrement"} />
-                        <input type="text" name="product__quantity__value" 
-                        value={inStock ? 1 : 0}
-                        className="product__quantity__value"  />
-                        <input type="button" value="+" className="product__quantity--increment" />
-                    </form>
-                </div>
+            {OptionsJSX}
 
-                <div className="product__variant" >
-                    <Variants variants={product.variants} />
-                </div>
-            </div>
-
-            <div className="product__actions" >
-              <button className="btn__add-cart">
-                <img src={addToCartIcon} alt="Add To Cart" />
-                <span> Add To Bag </span>
+            <div className=" w-full" >
+              <button className="w-11/12 mx-auto py-2 px-4 bg-black flex justify-center items-center gap-2 text-white font-semibold border border-black rounded-lg hover:bg-white hover:text-black"
+              onClick={() => {
+                (!inCart && 
+                    dispatchToCart({
+                    type: "added",
+                    item: product,
+                    options: options,
+                    })
+                )
+              }}
+              onMouseEnter={() => {
+                setIsHovered(true)
+              }}
+              onMouseLeave={() => {
+                setIsHovered(false)
+              }}
+              >
+                <img src={isHovered ? blackAddToCartIcon : whiteAddToCartIcon} alt="Add To Cart" className="w-5 pointer-events-none" />
+                <span className="pointer-events-none"> {inCart ? "Added To Bag" : "Add To Bag"} </span>
               </button>
             </div>
         </div>
     )
 }
-
-
-function Variants({variants}) {
-
-    const variantList = variants.map((option, index) => {
-        return (
-            <option key={index} value={option}>{option}</option>
-        )
-    })
-
-    return (
-        <select name="product__color" className="product__color">
-            {variantList}
-        </select>
-    )
-}
-
