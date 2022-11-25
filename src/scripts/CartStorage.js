@@ -43,14 +43,11 @@ export function CartStorageReducer(cart, action){
             return updatedCart;    
         }
         case "edited color" : {
-
-            // {put the updates here 
-            const update = {}
             const updatedCart = cart.map(item => {
-                if (item.id === cartItem.id) {
+                if (item.id === action.id) {
                     return {
                         ...item,
-                        color: update.color,
+                        color: action.color,
                     }
                 } else {
                     return item;
@@ -60,14 +57,12 @@ export function CartStorageReducer(cart, action){
             return updatedCart; 
         }
         case "edited quantity" : {
-
-            // {put the updates here 
-            const update = {}
+            console.log(action.id, action.quantity)
             const updatedCart = cart.map(item => {
-                if (item.id === cartItem.id) {
+                if (item.id === action.id) {
                     return {
                         ...item,
-                        quantity: update.quantity
+                        quantity: action.quantity
                     }
                 } else {
                     return item;
