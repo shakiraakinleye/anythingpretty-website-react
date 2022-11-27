@@ -1,12 +1,10 @@
 import { useState, useContext } from "react";
 import whiteAddToCartIcon from "../images/white-add-to-cart.png";
 import blackAddToCartIcon from "../images/black-add-to-cart.png";
-import  {convertPriceToLocalCurrency}  from "../scripts/utility";
-import { Options } from "./Options";
+import  {convertPriceToLocalCurrency, ClassDisabled}  from "../scripts/utility";
+import { Options, InitOptions } from "./Options";
 import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
 import "../styles/Product.css"
-import { InitOptions } from "./Options";
-
 
 export function Product({product}){
     const [isHovered, setIsHovered] = useState(false);
@@ -22,8 +20,8 @@ export function Product({product}){
 
     const {productColorChangeHandler, productIncreaseQuantityHandler, productDecreaseQuantityHandler, options} = InitOptions(initialOptions, product) 
 
+    const {classDisabled} = ClassDisabled(inStock)
 
-    const classDisabled = inStock ? "" : "opacity-50 pointer-events-none"
     const stockDisplay = inStock ? 
     (
         <>

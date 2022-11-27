@@ -4,7 +4,7 @@ import { CartContext } from "../scripts/CartStorage";
 import { CartItem } from "../components/CartItem";
 import sadFace from "../images/sad.png";
 import { DispatchCartContext } from "../scripts/CartStorage";
-import { convertPriceToLocalCurrency } from "../scripts/utility";
+import { convertPriceToLocalCurrency, ClassDisabled } from "../scripts/utility";
 import { Checkout } from "../components/Checkout";
 
 
@@ -25,9 +25,10 @@ export function Cartpage(){
         )
     }
 
+    const cartEmpty = cart.length === 0;
+    const {classDisabled} = ClassDisabled(!cartEmpty)
 
-    const isEmpty = cart.length === 0;
-    const cartPageContent = isEmpty ?
+    const cartPageContent = cartEmpty ?
     (
         <div className="flex flex-col justify-center items-center py-12 px-8 ">
             <img src={sadFace} alt="Sad face" className="w-16 mb-2" />
@@ -67,7 +68,7 @@ export function Cartpage(){
                         <p className="font-medium text-xl sm:text-3xl">
                             My Bag
                         </p>
-                        <button className="py-2 px-4 text-white bg-black border border-black rounded-lg hover:bg-[#eb0000] hover:border-[#eb0000]"
+                        <button className={"py-2 px-4 text-white bg-black border border-black rounded-lg hover:bg-[#eb0000] hover:border-[#eb0000] " + classDisabled}
                             onClick={() => {
                                 dispatchToCart({
                                     type: "clear"
@@ -106,7 +107,7 @@ export function Cartpage(){
                             </div>
             
                             <div>
-                                <select name="shipping"  className="w-full py-2 px-4 border border-black sm:py-3 "
+                                <select name="shipping"  className={"w-full py-2 px-4 border border-black sm:py-3 " + classDisabled}
                                     onChange={(e) => {
                                         setShipping(e.target.value)
                                     }}

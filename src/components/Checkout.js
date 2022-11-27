@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
-import { convertPriceToLocalCurrency } from "../scripts/utility";
+import { convertPriceToLocalCurrency, ClassDisabled} from "../scripts/utility";
 import checkoutImg from "../images/checkout.png";
 
 export function Checkout({cartSubtotal, shipping}) {
     const dispatchToCart = useContext(DispatchCartContext);
     const cart = useContext(CartContext);
+    const cartEmpty = cart.length === 0;
+    const {classDisabled} = ClassDisabled(!cartEmpty)
+
     const cartString = cart.map(item => {
         return `${item.name} ${item.quantity}pc(s) ${item.color} - ${convertPriceToLocalCurrency(item.price * item.quantity)} \n`
     }).reduce((acc, itemString) => {
@@ -27,7 +30,7 @@ export function Checkout({cartSubtotal, shipping}) {
     }
 
     return (
-        <button className="w-full py-3 px-8 flex justify-center items-center gap-3 text-white bg-black border border-black rounded-lg hover:bg-[#232323] hover:border-[#232323]"
+        <button className={"w-full py-3 px-8 flex justify-center items-center gap-3 text-white bg-black border border-black rounded-lg hover:bg-[#232323] hover:border-[#232323] " + classDisabled}
             onClick={placeOrder}
         >
             <img src={checkoutImg} alt="Checkout Button" className="w-6" />
