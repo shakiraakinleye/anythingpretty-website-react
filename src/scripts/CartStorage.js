@@ -14,7 +14,7 @@ function initialCart(){
 export const CartContext = createContext(null)
 export const DispatchCartContext = createContext(null)
 
-function updateCartStorage(updatedCart){
+export function updateCartStorage(updatedCart){
     localStorage.setItem("cart", JSON.stringify(updatedCart))
 }
 
@@ -43,11 +43,14 @@ export function CartStorageReducer(cart, action){
             return updatedCart;    
         }
         case "edited color" : {
+            const selected = action.color;
+            const otherVariants =  cartItem.variants.filter(v => v !== selected)  
             const updatedCart = cart.map(item => {
-                if (item.id === action.id) {
+                if (item.id === cartItem.id) {
                     return {
                         ...item,
                         color: action.color,
+                        variants : [selected, ...otherVariants]
                     }
                 } else {
                     return item;
@@ -57,9 +60,8 @@ export function CartStorageReducer(cart, action){
             return updatedCart; 
         }
         case "edited quantity" : {
-            console.log(action.id, action.quantity)
             const updatedCart = cart.map(item => {
-                if (item.id === action.id) {
+                if (item.id === cartItem.id) {
                     return {
                         ...item,
                         quantity: action.quantity
@@ -72,7 +74,7 @@ export function CartStorageReducer(cart, action){
             return updatedCart; 
         }
         case "deleted" : {
-            const id = action.item.id;
+            const id = cartItem.id;
             const updatedCart = cart.filter(item => item.id !== id)
             updateCartStorage(updatedCart)
             return updatedCart;
