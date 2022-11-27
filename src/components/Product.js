@@ -20,7 +20,7 @@ export function Product({product}){
         color: product.variants[0]
     }
 
-    const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialOptions, product) 
+    const {productColorChangeHandler, productIncreaseQuantityHandler, productDecreaseQuantityHandler, options} = InitOptions(initialOptions, product) 
 
 
     const classDisabled = inStock ? "" : "opacity-50 pointer-events-none"
@@ -55,9 +55,9 @@ export function Product({product}){
             <Options 
               item={product}
               options={options}
-              onDecreaseQuantity={decreaseQuantityHandler}
-              onIncreaseQuantity={increaseQuantityHandler}
-              onColorChange={colorChangeHandler}
+              onDecreaseQuantity={productDecreaseQuantityHandler}
+              onIncreaseQuantity={productIncreaseQuantityHandler}
+              onColorChange={productColorChangeHandler}
             />
 
             <div className=" w-full" >

@@ -1,64 +1,18 @@
 import React, {useContext} from "react";
 import { Options } from "./Options";
 import { convertPriceToLocalCurrency } from "../scripts/utility";
+import { InitOptions } from "./Options";
 import { DispatchCartContext } from "../scripts/CartStorage";
 
-import { InitOptions } from "./Options";
-
 export function CartItem({cartItem}){
-    const initialCartOptions = {
+    const dispatchToCart = useContext(DispatchCartContext)
+
+    const initialCartItemOptions = {
         quantity: cartItem.quantity,
         color: cartItem.color
     }
 
-    // Fix - Can't update Storage from Cart
-    const {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options} = InitOptions(initialCartOptions, cartItem) 
-
-    console.log(options)
-    const dispatchToCart = useContext(DispatchCartContext)
-
-    function quantityChangeDispatch(){
-        dispatchToCart(
-            {
-                type: "edited quantity",
-                id: cartItem.id,
-                quantity: options.quantity, 
-            }
-        )
-        console.log("quantityChangeDispatched")
-    }
-
-    function cartQuantityIncreaseHandler(){
-        increaseQuantityHandler()
-        // &&
-        // quantityChangeDispatch()
-        // dispatchToCart({
-        //         type: "edited quantity",
-        //         id: cartItem.id,
-        //         quantity: options.quantity, 
-        //     })
-    }
-
-    function cartQuantityDecreaseHandler(){
-        decreaseQuantityHandler() 
-        // &&
-        // quantityChangeDispatch();
-    }
-
-    function cartColorChangeHandler(e){
-        // console.log("colorChangeDispatched")
-        colorChangeHandler(e);
-        // console.log("colorChangeDispatched 2")
-        // dispatchToCart({
-        //     type: "edited color",
-        //     id: cartItem.id,
-        //     // color: "Gold"
-        //     color: options.color
-        // });
-        // console.log("colorChangeDispatched 3")
-
-    }
-
+    const {cartColorChangeHandler, cartQuantityIncreaseHandler, cartQuantityDecreaseHandler, options} = InitOptions(initialCartItemOptions, cartItem); 
 
     return(
         <div className="flex justify-between py-2 pr-2 border border-t-0 border-[#c8c8c8]">

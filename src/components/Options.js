@@ -1,19 +1,20 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { DispatchCartContext } from "../scripts/CartStorage";
 
 export function InitOptions(initOps, item ){
     const [options, setOptions] = useState(initOps)
+    const dispatchToCart = useContext(DispatchCartContext)
 
     const withinStock = options.quantity < item.stock;
 
-    function colorChangeHandler(e){
+    function productColorChangeHandler(e){
         setOptions({
             ...options,
             color: e.target.value,
         })
     }
     
-
-    function increaseQuantityHandler(){
+    function productIncreaseQuantityHandler(){
       withinStock && 
       setOptions({
         ...options,
@@ -21,7 +22,7 @@ export function InitOptions(initOps, item ){
         })
     }
 
-    function decreaseQuantityHandler(){
+    function productDecreaseQuantityHandler(){
       if (options.quantity > 1){
         setOptions({
             ...options,
@@ -30,8 +31,50 @@ export function InitOptions(initOps, item ){
     }
     }
 
+
+    function cartQuantityIncreaseHandler(){
+        if (withinStock) {
+            setOptions({
+                ...options,
+                quantity: (options.quantity + 1),
+            })
+            dispatchToCart({
+                type: "edited quantity",
+                item: item,
+                quantity: (options.quantity + 1), 
+            }) 
+        } 
+    }
+
+    function cartQuantityDecreaseHandler(){
+        if (options.quantity > 1){
+            setOptions({
+                ...options,
+                quantity: (options.quantity - 1),
+            }) 
+            dispatchToCart({
+                type: "edited quantity",
+                item: item,
+                quantity: (options.quantity - 1) 
+            })
+        }
+    }
+
+    function cartColorChangeHandler(e){
+        setOptions({
+            ...options,
+            color: e.target.value,
+        })
+        dispatchToCart({
+            type: "edited color",
+            item: item,
+            color: e.target.value,
+        }) 
+    }
+
+
     return(
-        {colorChangeHandler, increaseQuantityHandler, decreaseQuantityHandler, options}
+        {productColorChangeHandler, productIncreaseQuantityHandler, productDecreaseQuantityHandler, cartQuantityIncreaseHandler, cartQuantityDecreaseHandler, cartColorChangeHandler, options}
     )
 }
 
