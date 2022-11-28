@@ -42,7 +42,7 @@ export function Footer(){
 
             <div>
               <h1 className="font-semibold text-base mb-2">
-                Subscribe 
+                Subscribe To Our Emails
               </h1>
 
               <div className="w-2/3 sm:w-full">
@@ -59,7 +59,7 @@ export function Footer(){
                 <SocialLinks />
               </div>
            </div>
-           
+
           </div>
         </div>
 
