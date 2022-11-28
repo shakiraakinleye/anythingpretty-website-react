@@ -18,7 +18,7 @@ export function Navbar(){
 
                 <div className="flex">
                     <Link to="/cart-page" className="relative">
-                        <img src={cartIcon} alt="Cart" className="w-6 hover:w-7"/>
+                        <img src={cartIcon} alt="Cart" className="w-6 hover:scale-110 transition-transform"/>
                         <p className="bg-[#ca929c] absolute -top-1 -right-1 flex justify-center items-center w-4 h-4 text-xs border-0 rounded-full  ">
                             {cartCount}
                         </p>
