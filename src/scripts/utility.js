@@ -6,6 +6,6 @@ export  function convertPriceToLocalCurrency(value) {
 }
 
 export function ClassDisabled(cond){
-  const classDisabled = cond ? "" : "opacity-50 pointer-events-none";
+  const classDisabled = cond ? "" : "opacity-60 pointer-events-none";
   return {classDisabled}
 }
