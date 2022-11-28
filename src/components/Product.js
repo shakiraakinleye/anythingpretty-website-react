@@ -39,8 +39,8 @@ export function Product({product}){
 
     return(
         <div className={classDisabled + " flex flex-col items-center text-center px-4 py-2 capitalize"}>
-            <div className="mb-2">
-              <img src={require("../" + product.imageUrl)} alt={product.name} className="product__image" />
+            <div className="mb-2 max-w-[75%] sm:max-w-[160px] lg:max-w-[240px] overflow-clip">
+              <img src={require("../" + product.imageUrl)} alt={product.name} className="product__image w-3/4 mx-auto sm:w-full sm:h-40 lg:h-60 hover:scale-125" />
             </div>
 
             <p className="mb-2 text-sm">{product.name}</p>
@@ -58,7 +58,7 @@ export function Product({product}){
               onColorChange={productColorChangeHandler}
             />
 
-            <div className=" w-full" >
+            <div className="w-full mt-2" >
               <button className="w-11/12 mx-auto py-2 px-4 bg-black flex justify-center items-center gap-2 text-white font-semibold border border-black rounded-lg hover:bg-white hover:text-black"
               onClick={() => {
                 (!inCart && 
