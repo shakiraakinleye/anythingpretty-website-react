@@ -82,7 +82,7 @@ export function InitOptions(initOps, item ){
 export function Options({item, options, onColorChange, onIncreaseQuantity, onDecreaseQuantity}){
 
     return(
-            <div className="flex justify-center gap-4 mb-2">
+            <div className="flex justify-center gap-4">
                 <div>
                     <form id="product__quantity__form" className="h-full flex px-0.5 border-x border-y border-black rounded-sm" action="#">
                         <input type="button" value="-" className="bg-white w-5 text-center cursor-pointer hover:font-bold" 
@@ -114,7 +114,7 @@ function Variants({item, onChange}) {
 
     const variantList = item.variants.map((option, index) => {
         return (
-            <option key={index} value={option}>{option}</option>
+            <option key={index} value={option} className="px-3 py-10">{option}</option>
         )
     })
 
