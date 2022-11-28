@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HelpLinks, SocialLinks } from "./Links";
+import { HelpLinks, SocialLinks, Newsletter } from "./Links";
 import brandLogo from "../images/ap-favicon.png";
 import "../styles/Footer.css"
 
@@ -15,7 +15,7 @@ export function Footer(){
           </Link>
         </div>
 
-        <div className="footer__content flex flex-col gap-3 sm:grid sm:gap-5 lg:gap-40 px-2 mb-8">
+        <div className="footer__content flex flex-col gap-3 sm:grid sm:gap-5 lg:gap-32 px-2 mb-8">
           <div>
             <h1 className="mb-2 font-semibold text-base">
               About Us
@@ -38,15 +38,28 @@ export function Footer(){
             </div>
           </div>
 
-          <div>
-            <h1 className="mb-2 font-semibold text-base">
-              Follow Us
-            </h1>
-            <div className="flex flex-col gap-1">
-              <SocialLinks 
-                classes={"text-[#505050] hover:text-[#969696]"}
-              />
+          <div className="flex flex-col gap-3">
+
+            <div>
+              <h1 className="font-semibold text-base mb-2">
+                Subscribe 
+              </h1>
+
+              <div className="w-2/3 sm:w-full">
+                <Newsletter />
+              </div>
             </div>
+
+           <div>
+            <h1 className="font-semibold text-base mb-2 ">
+                Follow Our Socials
+              </h1>
+
+              <div className="flex gap-4">
+                <SocialLinks />
+              </div>
+           </div>
+           
           </div>
         </div>
 
