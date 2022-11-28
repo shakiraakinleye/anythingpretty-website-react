@@ -12,7 +12,7 @@ export function Navbar(){
             <div className="py-3 flex justify-between items-center">
                 <div>
                     <Link to="/">
-                        <img src={fullBrandLogo} alt="Brand Logo" className="w-28 sm:w-40" />
+                        <img src={fullBrandLogo} alt="Brand Logo" className="w-24 sm:w-32" />
                     </Link>
                 </div>
 
