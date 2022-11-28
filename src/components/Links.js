@@ -35,7 +35,7 @@ export function SocialLinks({classes}){
 export function Newsletter(){
     return (
         <div className="flex items-stretch border border-black rounded-md px-2">
-            <input type="email" placeholder="shakira@gmail.com" className="w-5/6 px-2 py-2 outline-0 border-none text-xs"></input>
+            <input type="email" placeholder="yourname@example.com" className="w-5/6 px-2 py-2 outline-0 border-none text-xs"></input>
             <button className="w-1/6 active:translate-x-1 transition-transform ">
                 <img src={sendArrow} alt="Send" className="w-full" />
             </button>
