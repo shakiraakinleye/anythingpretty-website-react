@@ -1,11 +1,14 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { Options } from "./Options";
 import { convertPriceToLocalCurrency } from "../scripts/utility";
 import { InitOptions } from "./Options";
 import { DispatchCartContext } from "../scripts/CartStorage";
+import delIcon from "../images/del-icon.png"
+import hoverDelIcon from "../images/del-icon-hover.png"
 
 export function CartItem({cartItem}){
     const dispatchToCart = useContext(DispatchCartContext)
+    const [isHovered, setIsHovered] = useState(false);
 
     const initialCartItemOptions = {
         quantity: cartItem.quantity,
@@ -49,7 +52,7 @@ export function CartItem({cartItem}){
                     </span>
                 </p>
 
-                <button className="w-14 justify-self-center py-1 px-4 text-white bg-[#eb0000] border border-[#eb0000] rounded-sm hover:bg-[#ff0000] "
+                <button className="w-14 justify-self-center py-1 px-4"
                 onClick={() => (
                     dispatchToCart(
                         {
@@ -58,9 +61,16 @@ export function CartItem({cartItem}){
                         }
                     )
                 )}
+                onMouseEnter={() => {
+                    setIsHovered(true)
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(false)
+                  }}
                 >
-                    X
+                    <img src={isHovered ? delIcon : hoverDelIcon} alt="Delete" className="w-12" />
                 </button>
+
             </div>
         </div>
     )
