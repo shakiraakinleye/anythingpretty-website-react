@@ -7,23 +7,22 @@ import { DispatchCartContext } from "../scripts/CartStorage";
 import { convertPriceToLocalCurrency, ClassDisabled } from "../scripts/utility";
 import { Checkout } from "../components/Checkout";
 
+function CartList(){
+    const cart = useContext(CartContext);
+
+    const cartList = cart.map((item) => {
+        return(
+            <CartItem key={item.id} cartItem={item} />
+        )
+    })
+
+    return(
+        <div>{cartList}</div>
+    )
+}
 
 export function Cartpage(){
     const cart = useContext(CartContext);
-
-    function CartList(){
-        const cartList = cart.map((item) => {
-            return(
-                <li key={item.id}>
-                    <CartItem cartItem={item} />
-                </li>
-            )
-        })
-
-        return(
-            <ul>{cartList}</ul>
-        )
-    }
 
     const cartEmpty = cart.length === 0;
     const {classDisabled} = ClassDisabled(!cartEmpty)
@@ -102,7 +101,7 @@ export function Cartpage(){
                                     Shipping
                                 </span> 
                                 <span>
-                                    00000
+                                    {convertPriceToLocalCurrency(shipping)}
                                 </span>
                             </div>
             
@@ -116,8 +115,10 @@ export function Cartpage(){
                                     <option value="1500">Lagos Mainland - ₦1,500.00</option>
                                     <option value="2000">Lagos Island - ₦2,000.00</option>
                                     <option value="2500">Lagos Outskirts - ₦2,500.00</option>
+                                    {/* get from JSON */}
                                 </select>
                             </div>
+                            {/* put delivery options here */}
                         </div>
         
         
