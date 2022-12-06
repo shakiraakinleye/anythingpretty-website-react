@@ -38,6 +38,7 @@ export function Product({product}){
     )
 
     return(
+      <span className={inStock ? " " :  "cursor-no-drop "}> 
         <div className={classDisabled + " flex flex-col items-center text-center px-4 py-2 capitalize"}>
             <div className="mb-2 max-w-[75%] sm:max-w-[160px] lg:max-w-[240px] overflow-clip">
               <img src={require("../" + product.imageUrl)} alt={product.name} className="product__image w-3/4 mx-auto sm:w-full sm:h-40 lg:h-60 hover:scale-125" />
@@ -83,5 +84,6 @@ export function Product({product}){
               </button>
             </div>
         </div>
+        </span>
     )
 }
