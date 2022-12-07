@@ -1,21 +1,19 @@
 import React from "react";
-import { Route, Routes } from 'react-router-dom';
-import { ProductsContextProvider } from "./scripts/ProductContext";
+import { Route, Routes } from "react-router-dom";
+import { DataContextProvider } from "./scripts/DataContext";
 import { CartContextProvider } from "./scripts/CartStorage";
-import { NoticeBanner, HelpBanner } from './components/Banners';
-import { Navbar } from './components/Navbar';
-import { Homepage } from './pages/Homepage';
+import { NoticeBanner, HelpBanner } from "./components/Banners";
+import { Navbar } from "./components/Navbar";
+import { Homepage } from "./pages/Homepage";
 import { Cartpage } from "./pages/Cartpage";
-import { Footer } from './components/Footer';
-import './App.css';
-import './index.css';
-
+import { Footer } from "./components/Footer";
+import "./App.css";
+import "./index.css";
 
 export function App() {
-
   return (
     <div className="App relative max-w-full tracking-wider">
-      <ProductsContextProvider>
+      <DataContextProvider>
         <CartContextProvider>
           <NoticeBanner />
           <HelpBanner />
@@ -26,8 +24,7 @@ export function App() {
           </Routes>
           <Footer />
         </CartContextProvider>
-      </ProductsContextProvider>
+      </DataContextProvider>
     </div>
   );
 }
-

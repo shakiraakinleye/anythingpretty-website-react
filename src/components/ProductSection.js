@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import React, { useContext } from "react";
-import { ProductsContext } from "../scripts/ProductContext";
+import { ProductsContext } from "../scripts/DataContext";
 import { Product } from "./Product";
 import "../styles/Product.css"
 
