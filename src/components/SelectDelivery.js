@@ -23,8 +23,12 @@ export function SelectDelivery({onChange}) {
 
   return (
     <div>
+      <label htmlFor="shipping" className="hidden">
+        Select A Shipping Destination
+      </label>
+
       <select
-        name="shipping"
+        id="shipping"
         className={
           "w-full py-2 px-4 border border-black sm:py-3 " + classDisabled
         }
