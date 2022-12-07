@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../scripts/CartStorage";
+import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
 import { CartItem } from "../components/CartItem";
-import sadFace from "../images/sad.png";
-import { DispatchCartContext } from "../scripts/CartStorage";
 import { convertPriceToLocalCurrency, ClassDisabled } from "../scripts/utility";
 import { Checkout } from "../components/Checkout";
+import { SelectDelivery } from "../components/DeliveryOptions";
+import sadFace from "../images/sad.png";
+
 
 function CartList(){
     const cart = useContext(CartContext);
@@ -56,8 +57,14 @@ export function Cartpage(){
     const cartSubtotal = subtotals.reduce((acc, sub) => {
         return acc + sub;
     }, 0)
+
     const [shipping, setShipping] = useState(0)
+    function shippingHandler(e){
+        setShipping(e.target.value)
+    }
+
     const cartTotal = cartSubtotal + +shipping;
+
 
     return(
         <div className="relative bg-white py-10 px-4 sm:px-8 lg:px-16 text-black">
@@ -104,21 +111,9 @@ export function Cartpage(){
                                     {convertPriceToLocalCurrency(shipping)}
                                 </span>
                             </div>
-            
-                            <div>
-                                <select name="shipping"  className={"w-full py-2 px-4 border border-black sm:py-3 " + classDisabled}
-                                    onChange={(e) => {
-                                        setShipping(e.target.value)
-                                    }}
-                                >
-                                    <option value="0">Select A Shipping Destination</option>
-                                    <option value="1500">Lagos Mainland - ₦1,500.00</option>
-                                    <option value="2000">Lagos Island - ₦2,000.00</option>
-                                    <option value="2500">Lagos Outskirts - ₦2,500.00</option>
-                                    {/* get from JSON */}
-                                </select>
-                            </div>
-                            {/* put delivery options here */}
+                           <SelectDelivery 
+                                onChange={shippingHandler}
+                           />
                         </div>
         
         
