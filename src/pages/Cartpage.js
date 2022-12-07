@@ -4,7 +4,7 @@ import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
 import { CartItem } from "../components/CartItem";
 import { convertPriceToLocalCurrency, ClassDisabled } from "../scripts/utility";
 import { Checkout } from "../components/Checkout";
-import { SelectDelivery } from "../components/DeliveryOptions";
+import { SelectDelivery } from "../components/SelectDelivery";
 import sadFace from "../images/sad.png";
 
 
