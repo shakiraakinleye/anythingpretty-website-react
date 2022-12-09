@@ -4,22 +4,22 @@ import { ClassDisabled } from "../scripts/utility";
 import { convertPriceToLocalCurrency } from "../scripts/utility";
 
 function DeliveryOptions() {
-  const deliveryLocations = useContext(DeliveryContext);
-  const arr = Object.entries(deliveryLocations)
+  const deliveryLocations = useContext(DeliveryContext)
+  const LocationsArray = Object.entries(deliveryLocations)
 
   return ( 
-    arr.map((option, index) => {
+    LocationsArray.map((location, index) => {
         return (
-        <option key={index} value={option[1].value}>
-            {option[0]} --&gt; {convertPriceToLocalCurrency(option[1].value)}
+        <option key={index} value={location[1].value}>
+            {location[0]} --&gt; {convertPriceToLocalCurrency(location[1].value)}
         </option>
         );
   })
   )
 }
 
-export function SelectDelivery({onChange}) {
-  const classDisabled = ClassDisabled();
+export function SelectDelivery({onChange, cartCond}) {
+  const {classDisabled} = ClassDisabled(cartCond);
 
   return (
     <div>
@@ -30,13 +30,17 @@ export function SelectDelivery({onChange}) {
       <select
         id="shipping"
         className={
-          "w-full py-2 px-4 border border-black sm:py-3 " + classDisabled
+          classDisabled + " w-full py-2 px-4 border border-black sm:py-3 " 
         }
         onChange={onChange}
       >
-        <option value="0">Select A Shipping Destination</option>
+        <option value="0">
+          Select A Shipping Destination
+        </option>
+
         <DeliveryOptions />
       </select>
     </div>
   );
 }
+
