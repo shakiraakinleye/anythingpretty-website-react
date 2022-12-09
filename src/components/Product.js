@@ -25,7 +25,7 @@ export function Product({ product }) {
     options,
   } = InitOptions(initialOptions, product);
 
-  const { classDisabled } = ClassDisabled(inStock);
+  const { classDisabled } = ClassDisabled(!inStock);
 
   const stockDisplay = inStock ? (
     <>
