@@ -1,13 +1,11 @@
 import { useContext } from "react";
-import { CartContext, DispatchCartContext } from "../scripts/CartStorage";
+import { DispatchCartContext } from "../scripts/CartStorage";
 import { convertPriceToLocalCurrency, ClassDisabled} from "../scripts/utility";
 import checkoutImg from "../images/checkout.png";
 
-export function Checkout({cartSubtotal, shipping}) {
+export function Checkout({cart, cartSubtotal, shipping, cartCond}) {
     const dispatchToCart = useContext(DispatchCartContext);
-    const cart = useContext(CartContext);
-    const cartEmpty = cart.length === 0;
-    const {classDisabled} = ClassDisabled(!cartEmpty)
+    const {classDisabled} = ClassDisabled(cartCond)
 
     const cartString = cart.map(item => {
         return `${item.name} ${item.quantity}pc(s) ${item.color} - ${convertPriceToLocalCurrency(item.price * item.quantity)} \n`

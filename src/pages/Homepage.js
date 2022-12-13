@@ -6,10 +6,10 @@ import { ReviewSection } from "../components/ReviewSection";
 
 export function Homepage(){
     return(
-        <div>
+        <>
            <AdSection /> 
            <ProductSection /> 
            <ReviewSection /> 
-        </div>
+        </>
     )
 }

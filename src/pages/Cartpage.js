@@ -26,7 +26,7 @@ export function Cartpage(){
     const cart = useContext(CartContext);
 
     const cartEmpty = cart.length === 0;
-    const {classDisabled} = ClassDisabled(!cartEmpty)
+    const {classDisabled} = ClassDisabled(cartEmpty)
 
     const cartPageContent = cartEmpty ?
     (
@@ -113,6 +113,7 @@ export function Cartpage(){
                             </div>
                            <SelectDelivery 
                                 onChange={shippingHandler}
+                                cartCond={cartEmpty}
                            />
                         </div>
         
@@ -125,9 +126,12 @@ export function Cartpage(){
                                 {convertPriceToLocalCurrency(cartTotal)}
                             </span>
                         </div>
+
                         <Checkout
+                            cart={cart}
                             cartSubtotal={cartSubtotal}
                             shipping={shipping}
+                            cartCond={cartEmpty}
                         />
         
                     </div>
