@@ -11,7 +11,7 @@ function DeliveryOptions() {
     LocationsArray.map((location, index) => {
         return (
         <option key={index} value={location[1].value}>
-            {location[0]} --&gt; {convertPriceToLocalCurrency(location[1].value)}
+            {location[0]} ({convertPriceToLocalCurrency(location[1].value)})
         </option>
         );
   })

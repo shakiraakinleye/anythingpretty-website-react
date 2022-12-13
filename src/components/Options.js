@@ -85,7 +85,7 @@ export function Options({item, options, onColorChange, onIncreaseQuantity, onDec
             <div className="flex justify-center gap-4">
                 <div>
                     <form id="product__quantity__form" className="h-full flex px-0.5 border-x border-y border-black rounded-sm" action="#">
-                        <input type="button" value="-" className="bg-white w-5 text-center cursor-pointer hover:font-bold" 
+                        <input type="button" value="-" className="bg-white w-5 text-center cursor-pointer hover:font-black " 
                             onClick={onDecreaseQuantity}
                         />
 
@@ -93,7 +93,7 @@ export function Options({item, options, onColorChange, onIncreaseQuantity, onDec
                             {options.quantity}   
                         </span>
                         
-                        <input type="button" value="+" className="bg-white w-5 text-center cursor-pointer hover:font-bold "                    
+                        <input type="button" value="+" className="bg-white w-5 text-center cursor-pointer hover:font-black "                    
                             onClick={onIncreaseQuantity}
                         />
                     </form>

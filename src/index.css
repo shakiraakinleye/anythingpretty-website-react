@@ -35,7 +35,7 @@ body {
 	background-color: #fff;
 	margin: 0;
 	font-size: 14px;
-	/* font-family: 'Nunito', sans-serif; */
+	font-family: serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
