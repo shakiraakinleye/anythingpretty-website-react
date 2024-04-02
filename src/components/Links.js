@@ -7,11 +7,11 @@ import sendArrow from "../images/send-arrow.png"
 export function HelpLinks({classes}){
     return(
         <>
-            <a href="www.google.com" className={classes + " help__link"}>Shipping</a>
-            <a href="www.google.com" className={classes + " help__link"}>Return Policy</a>
-            <a href="www.google.com" className={classes + " help__link"}>Maintenance Guide</a>
-            <a href="www.google.com" className={classes + " help__link"}>Contact Us</a>
-            <a href="www.google.com" className={classes + " help__link"}>FAQ</a>
+            <a href="#" className={classes + " help__link"}>Shipping</a>
+            <a href="#" className={classes + " help__link"}>Return Policy</a>
+            <a href="#" className={classes + " help__link"}>Maintenance Guide</a>
+            <a href="#" className={classes + " help__link"}>Contact Us</a>
+            <a href="#" className={classes + " help__link"}>FAQ</a>
         </>
     )
 }
@@ -19,13 +19,13 @@ export function HelpLinks({classes}){
 export function SocialLinks({classes}){
     return(
         <>
-            <a href="www.google.com" className={classes + " social__link"}>
+            <a href="#" className={classes + " social__link"}>
                 <img src={instagramIcon} alt="Instagram" className="w-6" />
             </a>
-            <a href="www.google.com" className={classes + " social__link"}>
+            <a href="#" className={classes + " social__link"}>
                 <img src={facebookIcon} alt="Facebook" className="w-6" />
             </a>
-            <a href="www.google.com" className={classes + " social__link"}>
+            <a href="#" className={classes + " social__link"}>
                 <img src={twitterIcon} alt="Twitter" className="w-6" />
             </a>
         </>
