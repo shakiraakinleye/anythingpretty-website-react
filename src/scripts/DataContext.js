@@ -10,7 +10,7 @@ export function DataContextProvider({children}) {
     const [reviews, setReviews] = useState(new Map())
   
     useEffect(() => {
-        fetch("https://shakiraakinleye.github.io/Data/db.json")
+        fetch("https://ap-mock-data.vercel.app/Data/db.json")
         .then(response =>  response.json())
         .then(responseJSON => {
             const products = responseJSON.products;
